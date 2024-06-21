@@ -2,22 +2,35 @@
 
 Este guia fornece instruções detalhadas para configurar o OCS Inventory para autenticar usuários via LDAP. Siga os passos abaixo para garantir que o OCS Inventory esteja configurado corretamente para usar o LDAP.
 
+## Nota Importante
+
+Lembre-se de que não explicaremos como configurar um servidor LDAP e nem como depurar a conexão LDAP. Acreditamos que esta parte está mais relacionada ao próprio servidor LDAP do que ao OCS.
+
+## Passo 1: Ativar Configuração Avançada
+
+Primeiro, você precisa habilitar a configuração avançada:
+
+1. Navegue até `Configuration > General configuration`.
+2. Clique na aba `Server`.
+3. Defina `ADVANCE_CONFIGURATION` como `ON`.
+4. Clique em `Update`.
+
 ## Requisitos
 
 Antes de começar, certifique-se de que você possui:
-- Um servidor OCS Inventory em funcionamento
-- Acesso a um servidor LDAP
-- O pacote `php-ldap` instalado no servidor OCS Inventory
+- Um servidor OCS Inventory em funcionamento.
+- Acesso a um servidor LDAP.
+- A extensão `php-ldap` instalada no servidor OCS Inventory.
 
-## Passo 1: Verificar Dependências
+## Passo 2: Verificar Dependências
 
-Primeiro, verifique se o `php-ldap` está instalado no seu servidor OCS Inventory. Execute o comando abaixo para listar os pacotes PHP instalados:
+Verifique se o `php-ldap` está instalado no seu servidor OCS Inventory. Execute o comando abaixo para listar os pacotes PHP instalados:
 
 ```bash
 yum list installed | grep -i php
 ```
 
-## Passo 2: Instalar Dependências
+## Passo 3: Instalar Dependências
 
 Se o `php-ldap` não estiver instalado, instale-o usando o seguinte comando:
 
@@ -25,7 +38,7 @@ Se o `php-ldap` não estiver instalado, instale-o usando o seguinte comando:
 yum install php73-php-ldap.x86_64 -y
 ```
 
-## Passo 3: Configurar o OCS Inventory
+## Passo 4: Configurar o OCS Inventory
 
 1. Abra o arquivo de configuração `var.php`, localizado no diretório `/usr/share/ocsinventory-reports/ocsreports/`:
 
@@ -41,9 +54,32 @@ define('AUTH_TYPE', 2);
 
 3. Salve e feche o arquivo.
 
-## Passo 4: Configurar Parâmetros LDAP (Opcional)
+## Configuração de Conexão LDAPS (Opcional)
 
-Dependendo da sua configuração LDAP específica, você pode precisar adicionar ou ajustar outros parâmetros de configuração LDAP no arquivo `var.php`. Consulte a documentação do OCS Inventory e do seu servidor LDAP para informações adicionais sobre esses parâmetros.
+Se você deseja configurar uma conexão LDAPS, será necessário configurar o arquivo de certificado usado:
+
+Edite o arquivo `/etc/ldap/ldap.conf` para configurar o certificado utilizado.
+
+## Passo Final: Configuração LDAP no OCS Inventory
+
+No OCS Inventory, acesse `Configurações Gerais > Configuração LDAP` e preencha os campos abaixo conforme o seu cenário:
+
+```
+CONEX_LDAP_SERVEUR=IPLDAP
+CONEX_ROOT_DN=bind_dn
+CONEX_ROOT_PW=bind_password
+CONEX_LDAP_PORT=389
+CONEX_DN_BASE_LDAP=OU=Users,DC=domain,DC=local
+CONEX_LOGIN_FIELD=sAMAccountName
+CONEX_LDAP_PROTOCOL_VERSION=3
+CONEX_LDAP_CHECK_FIELD1_NAME=memberOf
+CONEX_LDAP_CHECK_FIELD1_VALUE=CN=ocsinventory_superadmin,OU=OCSInventory,OU=Integracoes,DC=domain,DC=local
+CONEX_LDAP_CHECK_FIELD1_ROLE=Super administradores
+CONEX_LDAP_CHECK_FIELD2_NAME=memberOf
+CONEX_LDAP_CHECK_FIELD2_VALUE=CN=ocsinventory_admin,OU=OCSInventory,OU=Integracoes,DC=domain,DC=local
+CONEX_LDAP_CHECK_FIELD2_ROLE=Administradores
+CONEX_LDAP_CHECK_DEFAULT_ROLE=RO
+```
 
 ## Conclusão
 
