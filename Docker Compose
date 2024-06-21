@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+### OCS SERVER ###
+  ocsapplication:
+    image: ocsinventory/ocsinventory-docker-image:2.8.1
+    container_name : ocsapplication
+    restart: unless-stopped
+    ports:
+      - 8010:80
+      - 4433:443
+    volumes:
+       - ./WEB/281_varlibdata/_data/:/var/lib/ocsinventory-reports
+       - ./WEB/281_perlcomdata/_data/:/etc/ocsinventory-server
+       - ./WEB/281_ocsreportsdata/_data/:/usr/share/ocsinventory-reports/ocsreports
+       - ./WEB/281_httpdconfdata/_data/:/etc/httpd/conf.d
+       - ./WEB/281_ocsinventoryreports/_data/:/usr/share/ocsinventory-reports/
+    environment:
+      TZ: "America/Sao_Paulo"
+      OCS_DB_SERVER: IP SERVIDOR DOCKER
+      OCS_DB_PORT: 3309
+      OCS_DB_USER: ocsuser
+      OCS_DB_PASS: ocspass
+      OCS_DB_NAME: ocsweb
+      # SSL for MySQL
+      OCS_SSL_ENABLED: 0
+    links:
+      - ocsdb
+    depends_on:
+      - ocsdb
+
+### BANCO DE DADOS ###
+  ocsdb:
+    image : mysql:5.7
+    container_name : ocsdb
+    restart : unless-stopped
+    ports :
+      - 3309:3306
+    volumes :
+      - ./MYSQL/sql/:/docker-entrypoint-initdb.d/
+      - ./MYSQL/_data/:/var/lib/mysql
+    environment:
+      TZ: "America/Sao_Paulo"
+      MYSQL_ROOT_PASSWORD : rootpass
+      MYSQL_USER : ocsuser
+      MYSQL_PASSWORD : ocspass
+      MYSQL_DATABASE : ocsweb
