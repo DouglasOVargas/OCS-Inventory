@@ -12,7 +12,7 @@ Antes de começar, certifique-se de que você possui:
 - Um servidor OCS Inventory em funcionamento.
 - Acesso a um servidor LDAP.
 
-## Passo 1: Ativar Configuração Avançada
+## Ativar Configuração Avançada
 
 Primeiro, você precisa habilitar a configuração avançada:
 
@@ -54,7 +54,7 @@ define('AUTH_TYPE', 2);
 3. Salve e feche o arquivo.
 
 
-## Passo Final: Configuração LDAP no OCS Inventory
+## Configuração LDAP no OCS Inventory
 
 No OCS Inventory, acesse `Configurações Gerais > Configuração LDAP` e preencha os campos abaixo conforme o seu cenário:
 
