@@ -53,11 +53,6 @@ define('AUTH_TYPE', 2);
 
 3. Salve e feche o arquivo.
 
-## Configuração de Conexão LDAPS (Opcional)
-
-Se você deseja configurar uma conexão LDAPS, será necessário configurar o arquivo de certificado usado:
-
-Edite o arquivo `/etc/ldap/ldap.conf` para configurar o certificado utilizado.
 
 ## Passo Final: Configuração LDAP no OCS Inventory
 
