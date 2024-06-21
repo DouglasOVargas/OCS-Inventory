@@ -1,0 +1,13 @@
+Requisitos:
+  - php-ldap
+
+Verificar se o container atende aos requisitos:
+  - `yum list installed | grep -i php`
+
+Instalar dependências:
+  - `yum install php73-php-ldap.x86_64 -y` (versão atual do meu container)
+
+Configurações:
+  - Alterar o arquivo var.php:
+    - Localização: `/usr/share/ocsinventory-reports/ocsreports/var.php`
+    - Alterar a linha: `define('AUTH_TYPE', 1);` para `define('AUTH_TYPE', 2);`
