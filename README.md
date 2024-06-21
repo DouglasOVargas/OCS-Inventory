@@ -11,7 +11,6 @@ Lembre-se de que não explicaremos como configurar um servidor LDAP e nem como d
 Antes de começar, certifique-se de que você possui:
 - Um servidor OCS Inventory em funcionamento.
 - Acesso a um servidor LDAP.
-- A extensão `php-ldap` instalada no servidor OCS Inventory.
 
 ## Passo 1: Ativar Configuração Avançada
 
