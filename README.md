@@ -6,6 +6,13 @@ Este guia fornece instruções detalhadas para configurar o OCS Inventory para a
 
 Lembre-se de que não explicaremos como configurar um servidor LDAP e nem como depurar a conexão LDAP. Acreditamos que esta parte está mais relacionada ao próprio servidor LDAP do que ao OCS.
 
+## Requisitos
+
+Antes de começar, certifique-se de que você possui:
+- Um servidor OCS Inventory em funcionamento.
+- Acesso a um servidor LDAP.
+- A extensão `php-ldap` instalada no servidor OCS Inventory.
+
 ## Passo 1: Ativar Configuração Avançada
 
 Primeiro, você precisa habilitar a configuração avançada:
@@ -15,14 +22,7 @@ Primeiro, você precisa habilitar a configuração avançada:
 3. Defina `ADVANCE_CONFIGURATION` como `ON`.
 4. Clique em `Update`.
 
-## Requisitos
-
-Antes de começar, certifique-se de que você possui:
-- Um servidor OCS Inventory em funcionamento.
-- Acesso a um servidor LDAP.
-- A extensão `php-ldap` instalada no servidor OCS Inventory.
-
-## Passo 2: Verificar Dependências
+## Verificar Dependências
 
 Verifique se o `php-ldap` está instalado no seu servidor OCS Inventory. Execute o comando abaixo para listar os pacotes PHP instalados:
 
@@ -30,7 +30,7 @@ Verifique se o `php-ldap` está instalado no seu servidor OCS Inventory. Execute
 yum list installed | grep -i php
 ```
 
-## Passo 3: Instalar Dependências
+## Instalar Dependências
 
 Se o `php-ldap` não estiver instalado, instale-o usando o seguinte comando:
 
@@ -38,7 +38,7 @@ Se o `php-ldap` não estiver instalado, instale-o usando o seguinte comando:
 yum install php73-php-ldap.x86_64 -y
 ```
 
-## Passo 4: Configurar o OCS Inventory
+## Configurar o OCS Inventory
 
 1. Abra o arquivo de configuração `var.php`, localizado no diretório `/usr/share/ocsinventory-reports/ocsreports/`:
 
