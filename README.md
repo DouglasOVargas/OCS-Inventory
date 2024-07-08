@@ -42,7 +42,7 @@ yum install php73-php-ldap.x86_64 -y
 1. Abra o arquivo de configuração `var.php`, localizado no diretório `/usr/share/ocsinventory-reports/ocsreports/`:
 
 ```bash
-nano /usr/share/ocsinventory-reports/ocsreports/var.php
+vi /usr/share/ocsinventory-reports/ocsreports/var.php
 ```
 
 2. Adicione a seguinte linha ao arquivo `var.php` para definir o tipo de autenticação como LDAP:
